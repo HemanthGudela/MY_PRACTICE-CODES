@@ -1,0 +1,37 @@
+1)Deleting Nth node froma linked list 
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) 
+    {
+        int count=0;
+        ListNode *temp=head;
+        if(head==0)
+        return head;
+        while(temp)
+            {
+                count++;
+                temp=temp->next;
+            }
+        if(count==n)
+        {
+            head=head->next;//it means if head is pointing to 1st variable we are making 
+            it ot point to 2nd variable and returning the head,hence the first variable is removed 
+            return head;
+        }
+        temp=head;//everything went well here we need to re initialize temp 
+        back to the head,so we could start from the 1st node
+        n=count-n-1;
+        count=0;
+        while(temp)
+        {
+            if(count==n)
+            {
+                temp->next=temp->next->next;//it means when the count is equal to the required 
+                position-1 then we could skip the the position by incrementing count->next to count->next->next
+            }
+            count++;
+            temp=temp->next;
+        }
+        return head;
+    }
+};
