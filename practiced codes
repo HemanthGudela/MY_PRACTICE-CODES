@@ -74,3 +74,19 @@ bool checkKthBit(int n, int k)
     
   4)Check if its an odd or an even integer
   
+5)check if its a power of 2
+  1-dvide by 2 continously at the end the last quotient should be 1;
+  2-bit manipulation:we should left shift the X and & it with N,so when its 1 then its power of 2
+  3-right shift N and & it with 1 then if its 1 then its power of 2 
+  4-log2N then its floor,ceil comparision when both are equal then its power of 2 
+  bool isPowerofTwo(long long n){
+        if(n==0)
+        return false;
+        while(n>1&&(n&1)==0)
+        {
+            n=n>>1;
+        }
+        return (1&n==1);
+    }
+    
+6)
