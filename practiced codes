@@ -62,3 +62,15 @@ void print_vector(vector<int> &A)
 	for(int i=0;i<A.size();i++)
 	cout<<A[i]<<" ";
 }
+
+3)CVheck if the kth bit is set or not 
+1-by left shifting 1by k-1 bits and & with the binary form of N,
+2-By right shifting the N by k-1 bits and perforning & with 1 
+BOTH TC AND SC ARE O(1)FOR BOTH THE PROCESSES
+bool checkKthBit(int n, int k)
+    {
+        return (1<<(k)&n)!=0;
+    }
+    
+  4)Check if its an odd or an even integer
+  
