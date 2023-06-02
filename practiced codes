@@ -89,4 +89,32 @@ bool checkKthBit(int n, int k)
         return (1&n==1);
     }
     
-6)
+6)INTUITION:
+Thing is your gonna traverse the vector from the back and you've pushed the INT_MAX into the stack if any number less than that would replace it in the stack;
+Next if the current index elemeny in nums2 is positive and if its greather tha stack top then pop the stack till you get a number which is greater than the current element
+when you find that element add it to the top of the stack as well as the map(store element nums2[i] as the key and the value of the key is the top of stack since we want 
+the next greater element.Now run a loop of size num1.length and push map elements into vector 
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        stack<int> st;
+        map<int,int>mp;
+        st.push(INT_MAX);
+        for(int i=nums2.size()-1;i>=0;i--)
+        {
+            int current=nums2[i];
+            if(current)
+            while(st.top()<=current)
+            {st.pop();}
+
+            mp[nums2[i]]=st.top()==INT_MAX?-1:st.top();
+            st.push(current);
+        }
+        vector<int>ans;
+        for(auto it:nums1)
+        {
+            ans.push_back(mp[it]);
+        }
+        return ans;
+    }
+};
