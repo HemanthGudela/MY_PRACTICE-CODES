@@ -2,7 +2,8 @@ STACK:TYPES 1-STATIC 2-DYNAMIC(USING LL)  Infix to Postfix Stack  Expression Eva
 Balanced Parenthesis Stack   Undo-Redo Stack
 APPLICATIONS OF STACK:
 
-
+Monotonic stacks(from bottom eiter increasing or decreasing) can be used to solve many problems in linear time that would otherwise require quadratic time complexity.
+applications: sliding window maximum prblm,nearest smallest element to left or right of ana array,max area of a histogram
 
 
 
