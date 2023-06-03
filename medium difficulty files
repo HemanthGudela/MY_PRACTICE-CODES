@@ -43,3 +43,26 @@ public:
         
     }
 };
+
+next Greatesr in a circular array 
+INTUTION: the key factor is when i<n 
+class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>& nums) {
+        stack<int> st; int n=nums.size(); vector<int> ans(n,-1);
+        for(int j=2*n-1;j>=0;j--)
+        {
+            while(!st.empty()&&nums[j%n]>=st.top())
+            {
+                st.pop();
+            }
+            //1st traversal ki manam stack ni fill chesi ready ga unchutham so second traversal appudu idhe pattern lo stack ki changes chestham so np
+            if(j<n)
+            {
+               if(!st.empty()) ans[j]=st.top();
+            }
+            st.push(nums[j%n]);
+        }
+        return ans;
+    }
+};
