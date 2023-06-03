@@ -1,0 +1,19 @@
+STACK:TYPES 1-STATIC 2-DYNAMIC(USING LL)  Infix to Postfix Stack  Expression Evaluation Stack  Recursion Stack   Memory Management Stack 
+Balanced Parenthesis Stack   Undo-Redo Stack
+APPLICATIONS OF STACK:
+
+
+
+
+
+RECURSION:
+HEAD,TAIL,BODY
+
+
+The recursive Fibonacci algorithm has overlapping subproblems dynamic programming ImproveS such overlapped algorithms.
+a few algorithms, (e.g. merge sort, quick sort, etc…) result in optimal time complexity using recursion.
+
+Base Case:
+One critical requirement of recursive functions is the termination point or base case. 
+Every recursive program must have a base case to make sure that the function will terminate. 
+Missing base case results in unexpected behavior.
