@@ -118,3 +118,19 @@ public:
         return ans;
     }
 };
+
+PRINTING A GRAPH(ADJACENCY LIST)
+vector<vector<int>>clone;
+        for(int i=0;i<V;i++)
+        {
+            vector<int>temp;
+            temp.push_back(i);
+            for(auto it:adj[i])
+            {
+               temp.push_back(it);
+            }
+            clone.push_back(temp);
+            
+        }
+        return clone;// Code here
+    }
