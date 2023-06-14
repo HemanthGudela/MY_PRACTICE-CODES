@@ -18,3 +18,9 @@ Base Case:
 One critical requirement of recursive functions is the termination point or base case. 
 Every recursive program must have a base case to make sure that the function will terminate. 
 Missing base case results in unexpected behavior.
+
+GRAPHS :
+DFS:
+INORDER TRAVERSAL : it gives the non decreasing order incase of a binary search tree,to get it in non increasing order or descending order we need 
+to reverse the order.
+
