@@ -114,3 +114,31 @@ int orangesRotting(vector<vector<int>>& grid) {
         if(count!=cntfresh) return -1;
         return tm;
     }
+
+
+LINKED LISTS :
+LENGTH OF A LOOP IN A LINKED LIST :
+intuiton: using the tortoise method ,when first time slow and fast become equal run another loop such that fast is stationary and 
+slow is moving and slow next is not equal to fast 
+int countNodesinLoop(struct Node *head)
+{
+     struct Node *slow,*fast; int count=0,C;
+     slow=fast=head;
+     if(head==NULL) return 0;
+     while(fast!=NULL && fast->next!=NULL)
+     {
+         
+         slow=slow->next;
+         fast=fast->next->next;
+         if(slow==fast)
+         {
+             count++;
+             while(slow->next!=fast)
+             {
+                 count++; slow=slow->next;
+             }
+             return count;
+         }
+     }
+     return 0;
+}
