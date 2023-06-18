@@ -142,3 +142,40 @@ int countNodesinLoop(struct Node *head)
      }
      return 0;
 }
+
+DELETING THE MIDDLE OF A LINKED LIST 
+
+ ListNode* deleteMiddle(ListNode* head) {
+        if(head->next==NULL) return 0;
+        ListNode *slow,*fast; int count=0;
+        slow=head;
+        //this is the trick initialsing fast with 2 nodes ahead
+        fast=head->next->next;
+        while(fast!=NULL &&fast->next!=NULL)
+        {
+            count++;
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        slow->next=slow->next->next;
+    return head;
+    }
+
+SEGREGATING THE ODD AND EVEN NODES OF A LINKED LIST 
+intuition: seperate the list into even and odd lists and then connect odd-tail to even head 
+ListNode* oddEvenList(ListNode* head) {
+        if(head==NULL) return head;
+        ListNode *odd,*even,*evenhead;
+        //assigning odd with head,head constant,even with heaD.next and
+	evenhead with head.next here odd,even are the tails,head and even head are heads
+        odd=head; even=head->next; evenhead=head->next;
+        while(even!=NULL && even->next!=NULL)
+        {
+            odd->next=even->next;
+            even->next=even->next->next;
+            odd=odd->next;
+            even=even->next;
+        }
+        odd->next=evenhead;
+        return head;
+    }
