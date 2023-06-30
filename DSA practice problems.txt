@@ -1,0 +1,1023 @@
+REGULARLY CHECKOUT THE GFG CODES ALSO
+
+26/05/2023
+stack<pair<int,int>>st;
+    MinStack(){}
+    void push(int val) {
+        if(st.empty())
+        {st.push({val,val});}
+        else{st.push({val,min(st.top().second,val)});}
+    }
+    
+    void pop() {
+        st.pop();
+    }
+    
+    int top() {
+        return st.top().first;
+    }
+    
+    int getMin() {
+       return st.top().second;
+    }
+
+Implement a last-in-first-out (LIFO) stack using only two queues. The implemented 
+stack should support all the functions of a normal stack (push, top, pop, and empty).
+
+we can implement using a single queue(optimised) and 2 queues(naive)
+
+Implementing a stack using a dequeue
+class MyStack {
+public:
+    deque <int> dq;
+    MyStack() {
+          
+    }
+    
+    void push(int x) 
+    {
+        dq.push_back(x);
+    }
+    
+    int pop() {
+        int popped=dq.back();
+        dq.pop_back();
+        return popped;
+    }
+    
+    int top() {
+        int top=dq.back();
+        return top;
+    }
+    
+    bool empty() {
+        if(dq.empty())
+        return true; 
+        return false;
+    }
+};
+
+
+
+
+
+Write a program to implement a Stack using Array. Your task is to use the class as shown in 
+the comments in the code editor and complete the functions push() and pop() to implement a stack.
+
+void MyStack :: push(int x)
+{
+    top++;
+    arr[top]=x;// Your Code
+}
+
+//Function to remove an item from top of the stack.
+int MyStack :: pop()
+{
+    if(top==-1)
+    return -1;
+    
+    int x=arr[top];
+    top--;
+    return x;// Your Code       
+}
+
+Implement a Queue using an Array. Queries in the Queue are of the following type:
+(i) 1 x   (a query of this type means  pushing 'x' into the queue)
+(ii) 2     (a query of this type means to pop element from queue and print the poped element)
+
+void MyQueue :: push(int x)
+{
+        arr[rear]=x;
+        rear++;// Your Code
+}
+
+//Function to pop an element from queue and return that element.
+int MyQueue :: pop()
+{
+        if(front==rear){
+        return -1;
+        front=rear=0;
+        }
+        int x=arr[front];
+        front++;
+        return x;// Your Code       
+}
+
+DELETING ALL THE OCCURENCES OF A KEY IN A LINKED LIST 
+class Solution {
+  public:
+    void deleteAllOccurOfX(struct Node** head_ref, int x) {
+        Node *temp=*head_ref;//initialise head_ref to temp 
+        if(temp==NULL)  return;//if the list is null return 
+        if(temp->data==x && temp->next==NULL)//if only a single element point headref to null and free temp
+        {
+            *head_ref=NULL;
+            delete temp;
+            return;//u forgot this
+        }
+        while(temp!=NULL)//temp shouldnt be null not temp next but why?
+        
+        {
+            if(temp->data==x)
+            {
+                if(temp->prev==NULL)//if its null then clear temp uknow how
+                {
+                    temp->next->prev=NULL;//temp has no previous,u cannot use temp->prev->next
+                    *head_ref=temp->next;
+                }
+                if(temp->prev!=NULL)//if its not null the make next prev to prev there by indirectly deleting temp
+                {   temp->prev->next=temp->next;}
+                if(temp->next!=NULL)//if next is not null like prev do this 
+                {
+                    temp->next->prev=temp->prev;
+                }
+                Node* nextnode=temp->next;//initialse a new nextnode and copy temps value free the temp and swap
+                delete temp;
+                temp=nextnode;
+            }
+            else{ temp=temp->next;  }
+        }
+    }
+};
+
+ADDING 2 REVERSED LINKED LISTS :
+Intuition:
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* dummy=new ListNode();
+        ListNode* temp=dummy; int carry=0;
+        while(l1!=0 || l2!=0 || carry)
+        {
+             int sum=0;
+             if(l1!=0)
+             {
+                 sum+=l1->val;
+                 l1=l1->next;
+             }   
+             if(l2!=0)
+             {
+                 sum=sum+l2->val;
+                 l2=l2->next;
+                 
+             }
+             sum+=carry;
+             carry=sum/10;
+             ListNode* node=new ListNode(sum%10);
+             temp->next=node;
+             temp=temp->next;
+        }
+        return dummy->next;
+    }
+
+SEGREGATING THE ODD AND EVEN NODES OF A LINKED LIST 
+intuition: seperate the list into even and odd lists and then connect odd-tail to even head 
+ListNode* oddEvenList(ListNode* head) {
+        if(head==NULL) return head;
+        ListNode *odd,*even,*evenhead;
+        //assigning odd with head,head constant,even with heaD.next and
+	evenhead with head.next here odd,even are the tails,head and even head are heads
+        odd=head; even=head->next; evenhead=head->next;
+        while(even!=NULL && even->next!=NULL)
+        {
+            odd->next=even->next;
+            even->next=even->next->next;
+            odd=odd->next;
+            even=even->next;
+        }
+        odd->next=evenhead;
+        return head;
+    }
+
+LENGTH OF A LOOP IN A LINKED LIST :
+intuiton: using the tortoise method ,when first time slow and fast become equal run another loop such that fast is stationary and 
+slow is moving and slow next is not equal to fast 
+int countNodesinLoop(struct Node *head)
+{
+     struct Node *slow,*fast; int count=0,C;
+     slow=fast=head;
+     if(head==NULL) return 0;
+     while(fast!=NULL && fast->next!=NULL)
+     {
+         
+         slow=slow->next;
+         fast=fast->next->next;
+         if(slow==fast)
+         {
+             count++;
+             while(slow->next!=fast)
+             {
+                 count++; slow=slow->next;
+             }
+             return count;
+         }
+     }
+     return 0;
+}
+
+Check if the LL is a palindrome or not.Naive Approach and Optimised approach
+Here is the optimised approach:
+class Solution {
+public:
+ ListNode* ReverseList(ListNode* head) 
+    {
+        ListNode *dummy,*next_node;
+        dummy=NULL;
+        while(head!=0)
+        {
+          next_node=head->next;
+          head->next=dummy;
+          dummy=head;
+          head=next_node;
+        }
+        return dummy;
+    }
+    bool isPalindrome(ListNode* head) {
+        if(head==0||head->next==0)
+        return true;
+        ListNode *slow,*fast;
+        slow=fast=head;
+        while(fast->next&&fast->next->next)
+        {
+           slow=slow->next;
+           fast=fast->next->next;
+        }
+        slow->next=ReverseList(slow->next);
+        slow=slow->next;
+        while(slow!=NULL)
+        {
+            if(head->val!=slow->val)
+            return false;
+            slow=slow->next;
+            head=head->next;
+        }
+        return true;
+    }
+};
+
+Reverse a LL :Iterative approach
+You try writing the hash table code 
+ ListNode* reverseList(ListNode* head) 
+    {
+        ListNode *dummy,*next_node;
+        dummy=NULL;
+        while(head!=0)
+        {
+          next_node=head->next;
+          head->next=dummy;
+          dummy=head;
+          head=next_node;
+        }
+        return dummy;
+    }
+
+Reversing a LL using recursive Approach
+
+ListNode* reverseList(ListNode* head) 
+    {
+        if(head==0||head->next==0)
+        return head;
+        ListNode *prev;
+        prev=NULL;
+        ListNode *h2=reverseList(head->next);
+        head->next->next=head;
+         head->next=prev;
+        return h2;
+    }
+
+MEDIUM DIFFICULTY PROBLEMS :
+Find  the middle node 
+Intuition:
+Nomrally we need to traverse the complete list first and nexct only the half list so TC is N+N/2 so its a bit moire inorder to avoi this we use the 
+TORTOISE MODEL APPROACH :
+IN THIS THERE ARE 2 TORTOISES FAST,SLOW ,when you move fast by 2 steps move slow by 1 step,so by the time fast reaches null slow reaches middle look at the code below 
+
+ ListNode* middleNode(ListNode* head) {
+        ListNode *slow,*fast;
+        slow=fast=head;
+        while(fast!=NULL&&fast->next!=NULL)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        return slow;
+
+DOUBLY LINKED LIST 
+Reversing adoubly linked list 
+intuition : simply swap the previous and next nodes of the current node but be careful u r assigning the variables nextnode and porevious node to them 
+0)Node* reverseDLL(Node * head)
+{
+    struct Node *curr,*next_node,*prev_node;
+    prev_node=NULL;
+    curr=head;
+    while(curr!=0)
+        {
+            next_node=curr->next;
+            curr->next=prev_node;
+            curr->prev=next_node;
+            prev_node=curr;
+            curr=next_node;
+        }
+        return prev_node;
+}
+if(head==0) return head;
+    Node *start,*end;
+    start=end=head;
+    while(end->next!=NULL) end=end->next;
+    while(start<end)
+    {
+        swap(start->data,end->data);
+        start=start->next;
+        end=end->prev;
+    }
+    return head;
+
+
+1)Firstly get familiar with dynamic allocation of head and from there its common
+Node* constructDLL(vector<int>& arr) {
+        Node *head,*temp,*newnode;
+        head=new Node(arr[0]);
+        temp=head;
+        for(int i=1;i<arr.size();i++){
+            newnode=new Node(arr[i]);
+            temp->next=newnode;
+            newnode->prev=temp;
+            temp=newnode;
+    }
+    return head;
+
+2)Given a doubly-linked list, a position p, and an integer x. The task is to add a new node with value x at the position just after pth node in the doubly linked list.
+void addNode(Node *head, int pos, int data)
+{
+    int i=0;
+    struct Node *temp,*newnode;
+    newnode=new Node(data);
+    temp=head;
+    if(head==0)
+    {
+        head=newnode;
+        
+    }
+    else{
+        while(i<pos)
+        {
+            temp=temp->next;
+            i++;
+        }
+        if(temp->next==0)
+        {
+            newnode->next=temp->next;
+            temp->next=newnode;
+            newnode->prev=temp;
+        }
+        else{
+            newnode->next=temp->next;
+            temp->next->prev=newnode;
+            temp->next=newnode;
+            newnode->prev=temp;
+        }
+    }
+   ;// Your code here
+}
+
+3)Given a doubly linked list and a position. The task is to delete a node from given position in a doubly linked list.
+class Solution
+{
+    public:
+    Node* deleteNode(Node *head_ref, int x)
+    {
+        int i=1;
+        struct Node *prev,*curr;
+        curr=head_ref;
+        if(x==1)
+        {
+            curr=curr->next;
+            curr->prev=NULL;
+            return curr;
+        }
+            while(i<x)
+            {
+                i++;
+                prev=curr;
+                curr=curr->next;
+            }
+            if(curr->next==0)
+            {
+                prev->next=0;
+            }
+            else{
+                prev->next=curr->next;
+                curr->next->prev=prev;
+                curr->next=0;
+                curr->prev=0;
+            }
+            return head_ref;
+        }
+};
+
+4)
+
+BINARY SEARCH 
+
+FINDING THE FIRST AND LAST POSITION OF AN ELEMENT IN A SORTED ARRAY 
+
+Solution 2: Using Binary  search
+Approach: This approach uses Binary Search to find the index of the X. Then checks the left and right half of the array for getting more occurrences of X.
+
+Call a function that uses Binary search to determine the index of the X in the array, and return the index.
+
+Now we must check for the first occurrences of X at the left and right half of the array.
+
+Increase the counter if X exists at the left and right half of the array. At last return the counter.  0(LOGN)
+
+
+  vector<int> searchRange(vector<int>& v, int x) {
+        vector<int> vec(2,-1);
+        auto lb=lower_bound(v.begin(),v.end(),x);
+        auto li=lb-v.begin();
+
+        auto rb=upper_bound(v.begin(),v.end(),x);
+        auto ui=rb-v.begin();
+        auto ri=ui-1;
+        if(binary_search(v.begin(),v.end(),x)==true)
+        {
+            vec.clear();
+            vec.insert(vec.begin(),li);
+            vec.insert(vec.begin()+1,ri);
+           
+        }
+        return vec;
+    }
+
+
+MAJORITY ELEMENT:
+
+print a=out all the elements which occur more than n/3 times 
+
+Intuition:
+here i used an ordered map and gave the inputs to it there by calculation of the frequency and 
+printing the element whose frequency is greater than n/3
+
+vector<int> majorityElement(vector<int>& nums) {
+        vector<int>vect;
+        unordered_map<int,int> mp;
+        int n=nums.size()/3;
+        for(int i=0;i<nums.size();i++)
+        {
+            mp[nums[i]]++;
+        }
+        for(auto it=mp.begin();it!=mp.end();it++)
+        {
+            if(it->second>n)
+            vect.push_back(it->first);
+        }
+        return vect;
+
+
+06/02/2023
+PASCAL TRIANGLE 
+
+vector<vector<int>> generate(int numRows) {
+        vector<vector<int>>v(numRows);
+        for(int i=0;i<numRows;i++)
+        {
+            v[i].resize(i+1);//since we are starting i with zero the size should be i+1(min case)
+            v[i][0]=v[i][i]=1;
+            for(int j=1;j<i;j++)
+            {
+                v[i][j]=v[i-1][j-1]+v[i-1][j];
+            }
+        }
+        return v;
+
+3/2/2023
+
+
+row number given print the 5th row,row num col num given print the element at the row and colum
+GRAPHS 
+
+for(int i=1;i<=V;i++)
+        {
+            vector<int>temp;
+            for(int j=1;j<=V;j++)
+            {
+                if(adj[i][j]==1)
+                {
+                    if(i!=j)
+                    addedge(i,j);
+                    
+
+REPRESENTATION OF A GRAPH(matrix,list)
+
+
+29/01/2023
+
+Introduction to LinkedList, learn about struct, and how is node represented
+
+ Node* constructLL(vector<int>& arr) {
+        Node *first=new Node(arr[0]);
+        Node *curr=first;
+        for(int i=1;i<arr.size()&&curr!=NULL;i++)
+        {
+            Node *temp=new Node(arr[i]) ;
+            curr->next=temp;
+            curr=temp;
+        }
+            return first;
+        }
+
+
+23/01/2023
+
+SPIRAL TRAVERSAL:
+using brute force ,optimal and best solution:
+
+
+optimal:
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int m=matrix.size(),n=matrix[0].size(),top=0,bottom=matrix.size()-1,left=0,right=matrix[0].size()-1,direction=1;
+        vector<int> order;
+        while(order.size()<m*n)
+        {
+            switch(direction)
+            {
+                case 1:
+                for(int i=left;i<=right;i++) {order.push_back(matrix[top][i]);}
+                direction=2;
+                top++;
+                break;
+
+                case 2:
+                for(int i=top;i<=bottom;i++) {order.push_back(matrix[i][right]);}
+                direction=3;
+                right--;
+                break;
+                
+                case 3:
+                for(int i=right;i>=left;i--) {order.push_back(matrix[bottom][i]);}
+                direction=4;
+                bottom--;
+                break;
+
+                case 4:
+                for(int i=bottom;i>=top;i--) {order.push_back(matrix[i][left]);}
+                direction=1;
+                left++;
+                break;
+            }
+        }
+       return order;
+    }
+
+-->THIS IS TO FIND THE LARGEST ODD NUMBER IN A STRING 
+for(int i = num.length() - 1; i >= 0; --i)
+		if(int(num[i]) % 2)
+			return num.substr(0, i + 1);
+
+	return "";
+
+
+REVERSE THE WORDS REMOVING THE EXTRA SPACES
+
+ string reverseWords(string s) 
+    {
+if(s.size() == 0) return s;
+        stack<string> stack;
+        string result;
+        for(int i=0; i<s.size(); i++) {
+            string word;
+            if(s[i]==' ') continue; //skip spaces
+            while(i<s.size() && s[i]!=' ' ) { //store continuous letters into word
+                word += s[i]; i++;
+            }
+            stack.push(word); //push word to the stack
+        }
+        while(!stack.empty()) {
+            result += stack.top(); stack.pop();
+            if(!stack.empty()) result += " ";
+        }
+        return result;}
+
+reversing a string 
+ int n=s.size();
+        string revs;
+        for(auto it=s.rbegin();it!=s.rend();it++)
+        {
+            revs=revs+*it;
+        }
+        return revs;
+    }
+
+-->ROTATING THE MATRIX BY 90 DEGREES
+int n=matrix.size();
+        for(int i=0;i<n;i++)
+        { for(int j=0;j<i;j++){
+                swap(matrix[i][j],matrix[j][i]);}}
+        for(int i=0;i<n;i++){
+            reverse(matrix[i].begin(),matrix[i].end());
+
+
+setting matrix to zero 
+
+BEST SOLUTION:
+Intuition: we use the first column and first row as the dummy arrays to decide whether there is a zero in each row or column except for the first row and first column,since matrix[0][0] coincides with both the dummy arrays so we use col0 to look if there is a zero in the first column.
+
+I AM GOING TO ADD THE BRUTE FORCE APPROACH AND OPTIMAL APPROACH SOON 
+ void setZeroes(vector<vector<int>>& matrix) {
+        int col0=1;
+        int rowsize=matrix.size();
+        int columsize=matrix[0].size();
+        for(int i=0;i<rowsize;i++)
+        {
+            if(matrix[i][0]==0)
+            col0=0;
+            for(int j=1;j<columsize;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    matrix[0][j]=0;
+                    matrix[i][0]=0;
+                }
+            }
+        }
+        
+        for(int i=rowsize-1;i>=0;i--)
+        {
+            for(int j=columsize-1;j>=1;j--)
+            {
+                if(matrix[i][0]==0||matrix[0][j]==0)
+                {
+                    matrix[i][j]=0;
+                }
+            }
+            if(col0==0)
+            matrix[i][0]=0;
+        }
+        
+    }
+};
+
+
+20/01/2023
+
+REMOVING THE OUTER PARENTHESIS(Strings) 
+Without using stack;
+
+Intuituion :
+
+string removeOuterParentheses(string s)
+    {
+        stack <char>st;
+        string ans;
+        for(char i:s)
+        {
+            if(i=='(')
+            { 
+                if(st.size()>0)
+                {
+                    ans=ans+i;
+                }
+                st.push(i);   
+            }
+            else{
+                if(st.size()>1)
+                {
+                    ans=ans+i;
+                }
+                st.pop();
+            }
+        }
+     return ans;
+    }
+
+ string removeOuterParentheses(string s)
+    {
+        int count=0;
+        int length=s.length();
+        string ans;
+        for(char i:s)
+        {
+            if(i=='(')
+            { 
+                if(count>0)
+                {
+                    ans=ans+i;
+                }
+                count++;   
+            }
+            else{
+                if(count>1)
+                {
+                    ans=ans+i;
+                }
+                count--;
+            }
+        }
+    
+     return ans;
+    }
+};
+
+subarray with the maximum sum: 
+
+sliding window technique 
+
+
+THE BEST IS KADANE'S ALGORITHM 
+
+int maxSubArray(vector<int>& nums) 
+    {
+        int sum=0;
+        int maxi=INT_MIN;
+        for(auto it :nums )
+        {
+            sum=sum+it;
+            maxi=max(sum,maxi);
+            if(sum<0)
+            sum=0;
+        }
+        return maxi;
+    }
+
+25/12/2022
+
+The majority element is the element that appears more than ⌊n / 2⌋ times.
+
+ int majorityElement(vector<int>& nums) {
+        unordered_map<int,int>mp;
+        int gy;
+        for(int i=0;i<nums.size();i++)
+        {
+            mp[nums[i]]++;
+        }
+        for(auto it:mp)
+        {
+            if(it.second>nums.size()/2)
+            gy=it.first;
+        }
+     return gy;
+
+-->sorting colours red,blue,green coded as 0,1,2 
+using sorting method,count sorting method we can do 
+
+BUT THE BEST IS DUTCH NATIONAL FLAG ALGORITHM
+
+void sortColors(vector<int>& v)
+    {
+        int l=0,n=v.size(),i=0,high=v.size()-1;
+        while(i<=high)
+        {
+            switch(v[i]){
+
+            case 0:
+                swap(v[l++],v[i++]);
+                break;
+            case 1:
+                i++;
+                break;
+            case 2:
+                swap(v[i],v[high--]);
+                break;
+            }
+            }
+        } 
+
+24-12-2022
+-->)(nlogn) using binary search space complexity by O(n)
+next is counting sort 
+
+
+--> two sum assuming there's only one solution thew problem
+
+BRUTE FORE APPROACH  THIS TAKES O(n2) and )(N) space 
+vector<int> twoSum(vector<int>& v, int x) 
+    {
+        vector<int> ans;
+        int n=v.size();
+        if(n>=2)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j=i+1;j<n;j++)
+                {
+                   int a=v[i]+v[j];
+                    if(a==x)
+                    {
+                       ans.push_back(i);
+                       ans.push_back(j);
+                    }
+                }
+            }
+        }
+        return ans;        
+    }
+
+
+
+
+20 etc i have pasted codes 
+
+
+
+16/12/2022
+
+
+14/12/2022
+find the union and intersection of two arrays 
+
+this is the union 
+1)USING SET
+vector<int> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        //Your code here
+        set<int> s;
+        for(int i=0;i<n;i++)
+        {
+            s.insert(arr1[i]);
+        }
+        for(int i=0;i<m;i++)
+        {
+             s.insert(arr2[i]);
+        }
+        vector<int>vec;
+        for(auto it:s)
+        vec.push_back(it);
+        return vec;//Your code here
+        //return vector with correct order of elements
+    }
+
+
+2)using MAP
+vector<int> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        //Your code here
+        vector<int>vec;
+        map<int,int>mp;
+        for(int i=0;i<n;i++)
+        {
+           mp[arr1[i]]++;
+        }
+        for(int i=0;i<m;i++)
+        {
+            mp[arr2[i]]++;
+        }
+        for(auto it : mp)
+        {
+        vec.push_back(it.first);
+        }
+        
+        return vec;//Your code here
+        //return vector with correct order of elements
+    }
+
+3)using 2 pointers 
+Using the property that the arrays are sorted we can bring down the time complexity from O((m+n)log(m+n)) to O(log(m+n))
+
+ vector<int>vec;
+        int i=0,j=0;
+        while(i<n&&j<m)
+        {
+            if(arr1[i]<=arr2[j])//checking for 2 test cases
+            {
+                if(vec.size()==0||vec.back()!=arr1[i])
+                vec.push_back(arr1[i]);
+                i++;
+            }
+            else //the third case
+            {
+                if(vec.size()==0||vec.back()!=arr2[j])
+                vec.push_back(arr2[j]);
+                j++;
+            }
+        }
+
+//if the elements are left out then .......
+       while(i<n)
+       {
+          if(vec.back()!=arr1[i]) 
+          vec.push_back(arr1[i]);
+          i++;
+       }
+       while(j<m)
+       {
+           if(vec.back()!=arr2[j])
+           vec.push_back(arr2[j]);
+           j++;
+       }
+        
+        return vec;
+
+13/12/2022
+
+linear search binary search 
+
+
+
+
+12/12/2022
+
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        
+        int count=0;
+        int n=nums.size();
+        
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>nums[(i+1)%n])count++;
+        }
+        
+        return count<=1;
+    }
+};
+
+
+-->prblm :
+
+intuition:
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int k=0;
+        int insertion_index=1;
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i]!=nums[i-1])
+            {
+                nums[insertion_index]=nums[i];
+                insertion_index++;
+            }
+        }
+       return k=insertion_index;
+        
+    }
+};
+
+
+#include <bits/stdc++.h>
+#include<unordered_set>
+using namespace std;
+
+int main()
+{
+    unordered_set<string> s;
+    s.insert("hemanth");
+    s.insert("baharat");
+    s.insert("deepu");
+    s.insert("cutie");
+    for(auto it=s.begin();it!=s.end();it++)
+    cout<<(*it)<<endl;
+    
+    cout<<"number of elements : "<<s.size()<<endl;   
+    
+    
+    
+   string key="baharat";
+    if(s.find(key) != s.end())
+    s.erase(key);
+    else
+    cout<<"key not found";
+    
+    cout<<"number of elements : "<<s.size()<<endl;
+    
+    for(auto it=s.begin();it!=s.end();it++)
+    cout<<(*it)<<endl;
+    
+    if(s.count("cutie"))
+    cout<<"found";
+    else 
+    cout<<"not found";
+    
+    s.clear();
+    cout<<"no of elements: "<<s.size()<<endl;
+    
+   
+}
+
+Here i keep the codes which i practice 
+1)REVERSE,SIZE,PRINT,SORT IN ASC ORDER,DESC ORDER.
+void add_to_vector(vector<int> &A,int x)
+{
+	A.push_back(x);
+}
+void sort_vector_asc(vector<int> &A)
+{
+	sort(A.begin(),A.end());
+}
+void reverse_vector(vector<int> &A)
+{
+	reverse(A.begin(),A.end());
+}
+int size_of_vector(vector<int> &A)
+{
+	return(A.size());//Your code here
+}
+void sort_vector_desc(vector<int> &A)
+{
+	sort(A.begin(),A.end(),greater<int>());//gretaer<data type>
+}
+void print_vector(vector<int> &A)
+{
+	for(int i=0;i<A.size();i++)
+	cout<<A[i]<<" ";
+}
