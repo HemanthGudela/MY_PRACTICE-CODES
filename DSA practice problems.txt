@@ -103,6 +103,27 @@ int MyQueue :: pop()
         return x;// Your Code       
 }
 
+FINDING A PAIR OF SUM WHICH IS THE GIVEN NUMBER 
+vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+    {
+        vector<pair<int, int>> pairsum;
+        Node* slow=head;
+        Node* fast=head;
+        for(Node* temp=head;temp!=NULL;temp=temp->next)//this for loop changed the entire view on LL kind of binary search only 
+           fast=temp;//fast going to the last
+            
+            while(slow!=fast)
+                {
+                    if((slow->data+fast->data)==target)//here i tried declaring a variable and comnparing it it didnt workout so be carful
+                    pairsum.push_back({slow->data,fast->data});
+                   if((slow->data+fast->data)<target)
+                      slow=slow->next;
+                  else 
+                  fast=fast->prev;
+                }
+        return pairsum;
+    }
+
 DELETING ALL THE OCCURENCES OF A KEY IN A LINKED LIST 
 class Solution {
   public:
