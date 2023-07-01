@@ -103,6 +103,36 @@ int MyQueue :: pop()
         return x;// Your Code       
 }
 
+
+REMOVING DUPLICATES PROBLEM 101
+ Node* removeDuplicates(Node* head) {
+    if (head == nullptr)
+        return nullptr;
+
+    Node* current = head;
+    Node* nextNode;
+
+    while (current != nullptr) {
+        nextNode = current->next;
+        // Check if current and nextNode have the same data
+        if(nextNode!=NULL && current->data==nextNode->data)
+        {
+            current->next = nextNode->next;
+        
+        if(nextNode->next!=NULL)
+        {
+            nextNode->next->prev=current;
+            delete nextNode;
+        }
+        //inside this if condition onyl u need to make another if that nextnodes next isnt null then u gotta deleete the nextnode and assign currrent to it
+        }
+         else {
+            // Move to the next node
+            current = current->next;
+        }
+    }
+
+    return head;
 FINDING A PAIR OF SUM WHICH IS THE GIVEN NUMBER 
 vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
     {
