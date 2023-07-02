@@ -1,5 +1,17 @@
 REGULARLY CHECKOUT THE GFG CODES ALSO
 
+07/02/2023
+BIT MANIPULATION:
+find highest power of 2 less than equal to 11 which is 8=2^3 .Now you can observe that from 0-7
+all numbers have last binary bit as (0,1,0,1,0,1,0,1) having 8/2=4 set bits similarly observe second last bit of 0-7
+(0,0,1,1,0,0,1,1) →8/2=4 set bits similarly last third (0,0,0,0,1,1,1,1)=8/2=4;
+so combining all we get 3*(8/2) set bits. If we consider 3=x then generalising above  expression we get  ans= x*(2^(x-1)
+
+ if(number<=1) return number;
+        int x=log2(number);
+        
+        return(pow(2,x-1)*x+(number-pow(2,x))+1+countSetBits(number-pow(2,x)));
+
 26/05/2023
 stack<pair<int,int>>st;
     MinStack(){}
