@@ -11,8 +11,25 @@ Sol: if(number<=1) return number;
         
         return(pow(2,x-1)*x+(number-pow(2,x))+1+countSetBits(number-pow(2,x)));
 
-SET THE RIGHTMOST UNSET BIT ANDRETURN THE NUMBER : if the n and next number and is 1 then return or of n and n+1 or else return n ;
+SET THE RIGHTMOST UNSET BIT AND RETURN THE NUMBER : if the n and next number and is 1 then return or of n and n+1 or else return n ;
 swapping two numbers using XOR,AND A-B;
+DIVDE A NUMBER WITHOUT USING ANY OPERATORS (mul,div,mod)
+if(dividend == divisor)
+            return 1;
+        bool isPositive = (dividend<0 == divisor<0);    // if both are of same sign, answer is positive
+        unsigned int a = abs(dividend);
+        unsigned int b = abs(divisor);
+        unsigned int ans = 0;
+        while(a >= b){  // while dividend is greater than or equal to divisor
+            short q = 0;
+            while(a > (b<<(q+1)))
+                q++;
+            ans += (1<<q);  // add the power of 2 found to the answer
+            a = a - (b<<q);  // reduce the dividend by divisor * power of 2 found
+        }
+        if(ans == (1<<31) and isPositive)   // if ans cannot be stored in signed int
+            return INT_MAX;
+        return isPositive ? ans : -ans;
 26/05/2023
 stack<pair<int,int>>st;
     MinStack(){}
