@@ -1,5 +1,21 @@
 REGULARLY CHECKOUT THE GFG CODES ALSO
 
+RECURSION:(CODING NINJAS)
+ATOI
+int atoi(string s) {
+    // Write your code here.
+    string st;
+    for(int i=0;i<s.size();i++)
+    {
+        if(s[i]>=48 && s[i]<=57 || s[i]==45)
+          st+=s[i];
+    }
+    //since its in a proper order that is the reason we got a good one
+    //but if - is somewhere in between then there should abe aboolean negative and 
+    //if the number is negative then return -stoi(st)
+    return stoi(st);
+
+
 07/02/2023
 BIT MANIPULATION:
 find highest power of 2 less than equal to 11 which is 8=2^3 .Now you can observe that from 0-7
